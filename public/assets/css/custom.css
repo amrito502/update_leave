@@ -1,0 +1,12 @@
+.employee_profile_wrap{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.employee_profile_img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

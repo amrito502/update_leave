@@ -1,0 +1,23 @@
+.employee_list_header{
+    display: flex;
+    justify-content: space-between;
+    background: #ededed!important;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+
+.basic{
+    border-top: 4px solid #b331c3;
+}
+
+
+
+
+
+
+
+
+
+/*  */
