@@ -11,6 +11,7 @@ use App\Http\Controllers\CSVUploadController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
 use  App\Http\Controllers\NewstudentController;
 use App\Http\Controllers\LeaverequestController;
@@ -58,14 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/roles/{roleId}/give-permission', [RoleController::class, 'updatePermissionToRole']);
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/leave', [LeaverequestController::class, 'index'])->name('leave.index');
-    Route::post('/apply-leave', [LeaverequestController::class, 'apply'])->name('leave.apply');
-    Route::post('/leave/{leaveRequest}/approve', [LeaverequestController::class, 'approve'])->name('leave.approve');
-    Route::post('/leave/{leaveRequest}/reject', [LeaverequestController::class, 'reject'])->name('leave.reject');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
     Route::get('/department/show/{id}', [DepartmentController::class, 'show'])->name('department.show');
@@ -99,4 +92,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/employee/upload-certificates', [EmployeeController::class, 'uploadCertificates'])->name('employee.uploadCertificates');
     Route::get('employees/documents', [EmployeeController::class,'documents'])->name('employees.documents');
     Route::get('employees/under/{employeeId}/documents', [EmployeeController::class,'employee_under_documents'])->name('employees.under.documents');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/leave', [LeaverequestController::class, 'index'])->name('leave.index');
+    Route::post('/apply-leave', [LeaverequestController::class, 'apply'])->name('leave.apply');
+    Route::post('/leave/{leaveRequest}/approve', [LeaverequestController::class, 'approve'])->name('leave.approve');
+    Route::post('/leave/{leaveRequest}/reject', [LeaverequestController::class, 'reject'])->name('leave.reject');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/leave-type', [LeaveController::class, 'index'])->name('leave_type.index');
+    Route::post('/leave-type/store', [LeaveController::class, 'store'])->name('leave_type.store');
+    Route::get('/leave-type/{id}/edit', [LeaveController::class, 'edit'])->name('leave_type.edit');
+    Route::post('/leave-type/{id}/update', [LeaveController::class, 'update'])->name('leave_type.update');
+    Route::get('/leave-type/{id}/delete', [LeaveController::class, 'delete'])->name('leave_type.delete');
 });
