@@ -7,8 +7,9 @@
         <div class="row">
             <div class="col-md-12">
                 @if (session('success'))
-                <div class="alert alert-success mt-3" role="alert">{{ session('success') }}</div>
-            @endif
+                    <div style="border-left: 3px solid green; color: green; background: rgb(233, 229, 229)!important;"
+                        class="alert alert-white mt-3" role="alert">{{ session('success') }}</div>
+                @endif
                 <div class="card">
                     <div class="">
                         <div class="row mb-2">

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class LeaveController extends Controller
 {
+    // =================================
+    // ==========start-leave-type=======
     public function index(){
         $leaveTypes = LeaveType::all();
         return view('pages.leaveType.index', compact('leaveTypes'));
@@ -42,4 +44,11 @@ class LeaveController extends Controller
         return redirect()->route('leave_type.index')
                          ->with('success', 'Leave Type deleted successfully.');
     }
+
+    // =========end-leave-type========
+    // ===============================
+
+    // ========apply-leave+all-leave=====
+
+
 }

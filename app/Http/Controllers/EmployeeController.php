@@ -78,17 +78,13 @@ class EmployeeController extends Controller
 
     public function uploadCertificates(Request $request)
     {
-        // Validate that up to 6 files are uploaded
         $request->validate([
             'certificates' => 'required|array|max:6',
-            'certificates.*' => 'mimes:pdf,jpeg,png,jpg|max:2048', // Adjust file types & size as needed
+            'certificates.*' => 'mimes:pdf,jpeg,png,jpg|max:2048',
         ]);
 
         foreach ($request->file('certificates') as $file) {
-            // Store each file and save document details in the database
-            $path = $file->store('certificates', 'public'); // Store files in storage/app/public/certificates
-
-            // Save document information in the database
+            $path = $file->store('certificates', 'public'); 
             EmployeeCertificate::create([
                 'employee_id' => $request->employee_id,
                 'document_name' => $file->getClientOriginalName(),
@@ -107,7 +103,7 @@ class EmployeeController extends Controller
     public function employee_under_documents($employeeId)
     {
         $getEmployee = Employee::find($employeeId);
-        $employeeCertificates = $getEmployee->employeeCertificate; // Get subcategories of the category
+        $employeeCertificates = $getEmployee->employeeCertificate;
         $employees = Employee::all();
         return view('pages.employee.employee_un_doc', compact('employees', 'employeeCertificates'));
     }

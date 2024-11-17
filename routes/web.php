@@ -96,17 +96,35 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/leave', [LeaverequestController::class, 'index'])->name('leave.index');
-    Route::post('/apply-leave', [LeaverequestController::class, 'apply'])->name('leave.apply');
-    Route::post('/leave/{leaveRequest}/approve', [LeaverequestController::class, 'approve'])->name('leave.approve');
-    Route::post('/leave/{leaveRequest}/reject', [LeaverequestController::class, 'reject'])->name('leave.reject');
-});
-
-
-Route::middleware('auth')->group(function () {
     Route::get('/leave-type', [LeaveController::class, 'index'])->name('leave_type.index');
     Route::post('/leave-type/store', [LeaveController::class, 'store'])->name('leave_type.store');
     Route::get('/leave-type/{id}/edit', [LeaveController::class, 'edit'])->name('leave_type.edit');
     Route::post('/leave-type/{id}/update', [LeaveController::class, 'update'])->name('leave_type.update');
     Route::get('/leave-type/{id}/delete', [LeaveController::class, 'delete'])->name('leave_type.delete');
+});
+
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/leave', [LeaverequestController::class, 'index'])->name('leave.index');
+//     Route::post('/apply-leave', [LeaverequestController::class, 'apply'])->name('leave.apply');
+//     Route::post('/leave/{leaveRequest}/approve', [LeaverequestController::class, 'approve'])->name('leave.approve');
+//     Route::post('/leave/{leaveRequest}/reject', [LeaverequestController::class, 'reject'])->name('leave.reject');
+// });
+
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/manage/leave', [LeaverequestController::class, 'index'])->name('leave.index');
+    Route::get('/leave/apply', [LeaverequestController::class, 'create'])->name('leave.create');
+    Route::post('/leave/apply/store', [LeaverequestController::class, 'store'])->name('leave.store');
+    Route::get('/leave/{id}/apply-edit', [LeaverequestController::class, 'edit'])->name('leave.edit');
+    Route::post('/leave/{id}/apply-update', [LeaverequestController::class, 'update'])->name('leave.update');
+    Route::get('/leave/{id}/apply-delete', [LeaverequestController::class, 'delete'])->name('leave.delete');
+    Route::post('/leave/{leaveRequest}/approve', [LeaverequestController::class, 'approve'])->name('leave.approve');
+    Route::post('/leave/{leaveRequest}/reject', [LeaverequestController::class, 'reject'])->name('leave.reject');
+
+    Route::get('/leave/{id}/status-edit', [LeaverequestController::class, 'status_edit'])->name('leave_status.edit');
+    Route::post('/leave/{id}/status-update', [LeaverequestController::class, 'status_update'])->name('leave_status.update');
 });

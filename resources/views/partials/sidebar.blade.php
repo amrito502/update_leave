@@ -88,10 +88,7 @@
                                 <a href="{{ route('leave_type.index') }}" style="font-size: 13px;">Leave Type</a>
                             </li>
                             <li>
-                                <a href="calendar.html" style="font-size: 13px;">Leave approval</a>
-                            </li>
-                            <li>
-                                <a href="" style="font-size: 13px;">Leave application</a>
+                                <a href="{{ route('leave.index') }}" style="font-size: 13px;">Leave application</a>
                             </li>
                         </ul>
                     </div>
@@ -158,9 +155,6 @@
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li>
-                                <a href="calendar.html" style="font-size: 13px;">Attendance report</a>
-                            </li>
                             <li>
                                 <a href="calendar.html" style="font-size: 13px;">Employee report</a>
                             </li>

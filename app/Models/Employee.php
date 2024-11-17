@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Employee extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'employee_code', 'first_name', 'last_name', 'email', 'phone', 
-        'dob', 'user_id', 'department_id', 'designation_id', 'role_id', 
-        'date_of_joining', 'image'
-    ];
+    // protected $fillable = [
+    //     'employee_code', 'first_name', 'last_name', 'email', 'phone', 
+    //     'dob', 'user_id', 'department_id', 'designation_id', 'role_id', 
+    //     'date_of_joining', 'image'
+    // ];
 
     /**
      * Boot the model to automatically generate the employee_code.
@@ -35,7 +35,7 @@ class Employee extends Model
             }
         });
     }
-    // protected $guarded = [];
+    protected $guarded = [];
     // protected $fillable = [
     //     'first_name',
     //     'last_name',
