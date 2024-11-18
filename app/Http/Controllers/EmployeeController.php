@@ -19,7 +19,11 @@ class EmployeeController extends Controller
         return view('pages.employee.index', compact('employees'));
     }
 
-    public function show($id) {}
+    public function show($id)
+    {
+        $employee = Employee::findOrFail($id);
+        return view('pages.employee.show', compact('employee'));
+    }
     public function create()
     {
         $employees = Employee::all();
@@ -32,19 +36,25 @@ class EmployeeController extends Controller
 
     public function store(Request $request, Employee $employee)
     {
-    //    $request->validate([
-    //         'first_name' => 'required',
-    //         'last_name' => 'required',
-    //         'email' => 'nullable|email',
-    //         'phone' => 'nullable',
-    //         'department_id' => 'required',
-    //         'designation_id' => 'required',
-    //         'role_id' => 'required',
-    //         'date_of_joining' => 'nullable|date',
-    //     ]);
-   
+        //    $request->validate([
+        //         'first_name' => 'required',
+        //         'last_name' => 'required',
+        //         'email' => 'nullable|email',
+        //         'phone' => 'nullable',
+        //         'department_id' => 'required',
+        //         'designation_id' => 'required',
+        //         'role_id' => 'required',
+        //         'date_of_joining' => 'nullable|date',
+        //     ]);
+
         $latestEmployee = Employee::latest('id')->first();
-        $newEmployeeCode = 'EMP-' . str_pad((int)substr($latestEmployee->employee_code, 4) + 1, 3, '0', STR_PAD_LEFT);
+        if ($latestEmployee) {
+            $newEmployeeCode = 'EMP-' . str_pad((int)substr($latestEmployee->employee_code, 4) + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $newEmployeeCode = 'EMP-001';
+        }
+        $randomNumber = rand(100, 999);
+        $newEmployeeCode .= '-' . $randomNumber;
 
         $employee = new Employee();
         $employee->employee_code = $newEmployeeCode;
@@ -66,9 +76,52 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.index')->with('success', 'Employee created successfully');
     }
-    public function edit($id) {}
-    public function update(Request $request, $id) {}
-    public function delete($id) {}
+    public function edit($id)
+    {
+        $employee_find = Employee::find($id);
+        $employees = Employee::all();
+        $departments = Department::all();
+        $designations = Designation::all();
+        $users = User::all();
+        $roles = Role::all();
+        $get_employees = Employee::with(['department', 'designation', 'role', 'user'])->get();
+        return view('pages.employee.edit', compact('employee_find', 'get_employees', 'employees', 'departments', 'designations', 'users', 'roles'));
+    }
+    public function update(Request $request, $id)
+    {
+        $latestEmployee = Employee::latest('id')->first();
+        if ($latestEmployee) {
+            $newEmployeeCode = 'EMP-' . str_pad((int)substr($latestEmployee->employee_code, 4) + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $newEmployeeCode = 'EMP-001';
+        }
+        $randomNumber = rand(100, 999);
+        $newEmployeeCode .= '-' . $randomNumber;
+
+        $employee = Employee::find($id);
+        $employee->employee_code = $newEmployeeCode;
+        $employee->first_name = trim($request->first_name);
+        $employee->middle_name = trim($request->middle_name);
+        $employee->last_name = trim($request->last_name);
+        $employee->username = trim($request->username);
+        $employee->email = trim($request->email);
+        $employee->address = trim($request->address);
+        $employee->phone = trim($request->phone);
+        $employee->dob = trim($request->dob);
+        $employee->user_id = auth()->user()->id;
+        $employee->department_id = trim($request->department_id);
+        $employee->designation_id = trim($request->designation_id);
+        $employee->role_id = trim($request->role_id);
+        $employee->date_of_joining = trim($request->date_of_joining);
+        $employee->update();
+        return redirect()->route('employees.index')->with('success', 'Employee Updated successfully');
+    }
+    public function delete($id)
+    {
+        $employee = Employee::find($id);
+        $employee->delete();
+        return redirect()->route('employees.index')->with('success', 'Employee Deleted successfully');
+    }
 
 
 
@@ -84,7 +137,7 @@ class EmployeeController extends Controller
         ]);
 
         foreach ($request->file('certificates') as $file) {
-            $path = $file->store('certificates', 'public'); 
+            $path = $file->store('certificates', 'public');
             EmployeeCertificate::create([
                 'employee_id' => $request->employee_id,
                 'document_name' => $file->getClientOriginalName(),

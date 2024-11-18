@@ -19,6 +19,11 @@ class LeaverequestController extends Controller
         return view('pages.leave.index', ['leaveRequests' => $leaveRequests, 'lreq' => $lreq]);
     }
 
+    public function show($id){
+        $leaveRequest = LeaveRequest::findOrFail($id);
+        return view('pages.leave.show',compact('leaveRequest'));
+    }
+
     public function create()
     {
         $employees = Employee::all();

@@ -39,7 +39,7 @@
                                 @foreach ($leaveRequests as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->employee->first_name ?? 'N/A' }}</td>
+                                        <td>{{ $item->employee->first_name . ' ' . $item->employee->last_name . ' -ID : '. ' ' . $item->employee->employee_code ?? 'N/A' }}</td>
                                         <td>{{ $item->leaveType->name ?? 'N/A' }}</td>
                                         <td>{{ $item->start_date }}</td>
                                         <td>{{ $item->end_date }}</td>
@@ -79,7 +79,7 @@
                                             </td>
                                         @endcan
                                         <td>
-                                            <a href="" class="btn btn-info btn-sm">View</a>
+                                            <a href="{{ route('leave.show', $item->id) }}" class="btn btn-info btn-sm">View</a>
                                             <a href="{{ route('leave.edit', $item->id) }}"
                                                 class="btn btn-success btn-sm">Edit</a>
                                             <a onclick="return confirm('Are you sure you want to delete this leave?')"

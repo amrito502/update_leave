@@ -17,7 +17,7 @@
                                 <div class="row mb-2">
                                     <div class="col-md-6">
                                         <h4 class="mt-2">
-                                            <div class="icon-check-square text-success"> Apply Leave Edit : </div>
+                                            <div class="icon-edit1 text-success"> Apply Leave Edit : </div>
                                         </h4>
                                     </div>
                                     <div class="col-md-6">

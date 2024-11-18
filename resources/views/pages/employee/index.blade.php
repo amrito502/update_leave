@@ -1,4 +1,5 @@
 @extends('master')
+@section('meta_title', 'Employees')
 @section('admin_page_header', 'Employees')
 @section('content')
 
@@ -12,7 +13,7 @@
                 <div class="">
                     <div class="row mb-2">
                         <div class="col-md-6">
-                            <h4 class="mt-2">Employee List : </h4>
+                            <h4 class="mt-2 icon-check-square text-success">Employee List : </h4>
                         </div>
                         <div class="col-md-6">
                             <a href="{{ route('employee.create') }}" class="btn btn-success float-right mt-2">Add Employee</a>
@@ -23,8 +24,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Employee ID</th>
+                                    <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Department</th>
@@ -37,8 +38,8 @@
                                 @foreach ($employees as $employee)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $employee->first_name }}</td>
-                                        <td>{{ $employee->last_name }}</td>
+                                        <td>{{ $employee->employee_code }}</td>
+                                        <td>{{ $employee->first_name . ' ' . $employee->last_name }}</td>
                                         <td>{{ $employee->email }}</td>
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ $employee->department->name ?? 'N/A' }}</td>

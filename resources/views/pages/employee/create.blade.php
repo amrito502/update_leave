@@ -33,7 +33,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="">Employee Code</label>
-                                        <input type="text" name="employee_code" class="form-control">
+                                        <input type="text" name="employee_code" class="form-control" readonly>
                                     </div>
 
                                     <div class="mb-3">
@@ -143,12 +143,12 @@
             <div class="card mt-5">
                <form action="{{ route('employee.uploadCertificates') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="card-header bg-success">
-                    <span class="text-white">Documents</span>
+                <div class="card-header" style="background: #072478  !important;">
+                    <span class="" style="color: #fff;">Maltiple Traning Ceetificate Upload :</span>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="employee_id" class="form-label">Select a Employee For Upload Multiple Document</label>
+                        {{-- <label for="employee_id" class="form-label">Select a Employee For Upload Multiple Document</label> --}}
                         <select class="form-control @error('employee_id') is-invalid @enderror" id="employee_id" name="employee_id"
                             required>
                             <option value="" style="background: rgb(231, 232, 233); font-size: 15px;">
@@ -165,14 +165,14 @@
                     <div class="form-group">
                         <div class="input-group mt-2">
                             <div class="custom-file">
-                                <input type="file" name="certificates[]" accept="application/pdf,image/*" multiple class="custom-file-input" id="inputGroupFile02">
+                                <input type="file" name="certificates[]" accept="application/pdf,image/*" multiple class="custom-file-input" id="inputGroupFile02" required>
                                 <label class="custom-file-label" for="inputGroupFile02"
                                     aria-describedby="inputGroupFileAddon02">Choose file</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info">Upload Document</button>
+                        <button type="submit" style="font-size: 17px;" class="btn btn-info"><span class="icon-upload-to-cloud mr-1"></span> <span class="pb-3">Upload Ceetificate</span></button>
                     </div>
                 </div>
                </form>

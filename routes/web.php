@@ -117,6 +117,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/manage/leave', [LeaverequestController::class, 'index'])->name('leave.index');
+    Route::get('/leave/{id}/show', [LeaverequestController::class, 'show'])->name('leave.show');
     Route::get('/leave/apply', [LeaverequestController::class, 'create'])->name('leave.create');
     Route::post('/leave/apply/store', [LeaverequestController::class, 'store'])->name('leave.store');
     Route::get('/leave/{id}/apply-edit', [LeaverequestController::class, 'edit'])->name('leave.edit');
