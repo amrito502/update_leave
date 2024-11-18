@@ -4,18 +4,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CSVUploadController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DesignationController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
 use  App\Http\Controllers\NewstudentController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\LeaverequestController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +35,15 @@ Route::get('/', [AuthController::class, 'load_login'])->name('login');
 Route::post('/store-login', [AuthController::class, 'login']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+   
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -128,4 +135,35 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/leave/{id}/status-edit', [LeaverequestController::class, 'status_edit'])->name('leave_status.edit');
     Route::post('/leave/{id}/status-update', [LeaverequestController::class, 'status_update'])->name('leave_status.update');
+});
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/awards', [DesignationController::class, 'index'])->name('award.index');
+//     Route::get('/award/show/{id}', [DesignationController::class, 'show'])->name('award.show');
+//     Route::get('/award/create', [DesignationController::class, 'create'])->name('award.create');
+//     Route::post('/award/store', [DesignationController::class, 'store'])->name('award.store');
+//     Route::get('/award/edit/{id}', [DesignationController::class, 'edit'])->name('award.edit');
+//     Route::post('/award/update/{id}', [DesignationController::class, 'update'])->name('award.update');
+//     Route::get('/award/delete/{id}', [DesignationController::class, 'delete'])->name('award.delete');
+// });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/accounts-settings', [DashboardController::class, 'index'])->name('accounts_settings.index');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notices', [NoticeController::class, 'index'])->name('notices.index');
+    Route::get('/notices/{id}/show', [NoticeController::class, 'show'])->name('notices.show');
+    Route::get('/notices/create', [NoticeController::class, 'create'])->name('notices.create');
+    Route::post('/notices', [NoticeController::class, 'store'])->name('notices.store');
+    Route::get('/notices/{notice}/edit', [NoticeController::class, 'edit'])->name('notices.edit');
+    Route::put('/notices/{notice}', [NoticeController::class, 'update'])->name('notices.update');
+    Route::get('/notices/{id}', [NoticeController::class, 'delete'])->name('notices.delete');
 });

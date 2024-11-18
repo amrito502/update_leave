@@ -44,7 +44,7 @@
                                     <div class="doc-labels">
                                         @foreach ($employees as $employee)
                                             <a href="{{ route('employees.under.documents',$employee->id) }}" class="">
-                                                <i class="icon-receipt"></i> {{ $employee->first_name }}
+                                                <i class="icon-user"></i> {{ $employee->first_name . ' ' . $employee->last_name . ' -ID : ' . ' ' . $employee->employee_code}}
                                             </a>
                                         @endforeach
                                     </div>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="documents-header">
                                 <h3>Today <span class="date" id="todays-date"></span></h3>
-                                <a href="{{ route('employee.create') }}" class="btn btn-primary btn-lg">Add Document</a>
+                                <a href="{{ route('employee.create') }}" class="btn btn-primary btn-lg">Upload Employee Documents</a>
                             </div>
                             <div class="documentsContainerScroll">
                                 <div class="documents-body">

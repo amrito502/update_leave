@@ -2,7 +2,7 @@
 				
     <!-- Sidebar brand start  -->
     <div class="sidebar-brand">
-        <a href="" class="logo">
+        <a href="{{ route('dashboard') }}" class="logo">
             <img class="logo_sidebar" src="{{ asset('assets/img/prf_logo.webp') }}" alt="Admin Logo" />
         </a>
     </div>
@@ -69,7 +69,7 @@
                                 <a href="{{ route('employees.index') }}" style="font-size: 13px;">Employees</a>
                             </li>
                             <li>
-                                <a href="{{ route('employees.documents') }}" style="font-size: 13px;">Documents</a>
+                                <a href="{{ route('employees.documents') }}" style="font-size: 13px;">Traning Ceetificates</a>
                             </li>
                         </ul>
                     </div>
@@ -96,7 +96,7 @@
 
 
 
-                <li class="sidebar-dropdown">
+                {{-- <li class="sidebar-dropdown">
                     <a href="#" style="font-size: 15px;">
                         <i class="icon-shield "></i>
                         <span class="menu-text">Award</span>
@@ -109,7 +109,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
 
                 {{-- <li class="sidebar-dropdown">
@@ -156,10 +156,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="calendar.html" style="font-size: 13px;">Employee report</a>
-                            </li>
-                            <li>
-                                <a href="calendar.html" style="font-size: 13px;">Leave report</a>
+                                <a href="{{ route('reports.index') }}" style="font-size: 13px;">Leave report</a>
                             </li>
                         </ul>
                     </div>
@@ -174,7 +171,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="calendar.html" style="font-size: 13px;">Notice</a>
+                                <a href="{{ route('notices.index') }}" style="font-size: 13px;">Notice</a>
                             </li>
                         </ul>
                     </div>
@@ -188,7 +185,7 @@
                 </li> --}}
 
                 <li>
-                    <a href="" style="font-size: 15px; ">
+                    <a href="{{ route('accounts_settings.index') }}" style="font-size: 15px; ">
                         <i class="icon-settings "></i>
                         <span class="menu-text">Settings</span>
                     </a>

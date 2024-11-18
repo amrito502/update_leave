@@ -41,11 +41,11 @@
 
                             <div class="docTypeContainerScroll">
                                 <div class="docs-block">
-                                    <h5>Favourites</h5>
+                                    <h5>All Employees Lists</h5>
                                     <div class="doc-labels">
                                         @foreach ($employees as $employee)
                                             <a href="{{ route('employees.under.documents',$employee->id) }}" class="">
-                                                <i class="icon-receipt"></i> {{ $employee->first_name }}
+                                                <i class="icon-user"></i> {{ $employee->first_name }}
                                             </a>
                                         @endforeach
                                     </div>

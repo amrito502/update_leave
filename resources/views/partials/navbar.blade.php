@@ -66,7 +66,7 @@
                         <li>
                             <a href="#">
                                 <div class="user-img away">
-                                    <img src="img/user21.png" alt="User">
+                                    <img src="{{ url('/') }}/assets/img/user21.png" alt="User">
                                 </div>
                                 <div class="details">
                                     <div class="user-title">Abbott</div>
@@ -104,9 +104,9 @@
             </li>
             <li class="dropdown">
                 <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-                    <span class="user-name">PRF</span>
+                    <span class="user-name">{{ Auth::user()->name }}</span>
                     <span class="avatar">
-                        <img src="{{ url('/') }}/assets/img/user24.png" alt="avatar">
+                        <img src="{{ asset('assets/img/profile.jpg') }}" alt="avatar">
                         <span class="status online"></span>
                     </span>
                 </a>
@@ -114,14 +114,13 @@
                     <div class="header-profile-actions">
                         <div class="header-user-profile">
                             <div class="header-user">
-                                <img src="{{ url('/') }}/assets/img/user24.png" alt="Admin Template">
+                                <img src="{{ asset('assets/img/profile.jpg') }}" alt="Admin Template">
                             </div>
-                            <h5>Amrito Bosu</h5>
-                            <p>Admin</p>
+                            <h5>{{ Auth::user()->name }}</h5>
                         </div>
-                        <a href="user-profile.html"><i class="icon-user1"></i> My Profile</a>
-                        <a href="account-settings.html"><i class="icon-settings1"></i> Account Settings</a>
-                        <a href="login.html"><i class="icon-log-out1"></i> Sign Out</a>
+                        <a href="{{ route('accounts_settings.index') }}"><i class="icon-user1"></i> My Profile</a>
+                        <a href="{{ route('accounts_settings.index') }}"><i class="icon-settings1"></i> Account Settings</a>
+                        <a href="{{ route('logout') }}"><i class="icon-log-out1"></i> Sign Out</a>
                     </div>
                 </div>
             </li>
